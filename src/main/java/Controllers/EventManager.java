@@ -36,4 +36,11 @@ public class EventManager {
         return targets;
     }
 
+    @Override
+    public String toString() {
+        return "EventManager{" +
+                "targets=" + targets +
+                ", targetDao=" + targetDao +
+                '}';
+    }
 }

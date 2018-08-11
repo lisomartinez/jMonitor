@@ -15,11 +15,8 @@ public class DirectoryMonitor {
         this.watcher = watcher;
     }
 
-    public void initialize(){
-        watcher.registerTargets(eventHandler.getTargets());
-    }
-
     public void start() {
+        watcher.registerTargets(eventHandler.getTargets());
         ExecutorService executor = Executors.newFixedThreadPool(10);
         executor.execute(watcher);
         executor.execute(eventHandler);

@@ -1,5 +1,7 @@
 package Controllers;
 
+import java.nio.file.Path;
+
 public interface OperationCommand {
-    void execute();
+    void execute(Path source);
 }

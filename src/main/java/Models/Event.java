@@ -23,4 +23,11 @@ public abstract class Event {
         return extension;
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "source=" + source +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }

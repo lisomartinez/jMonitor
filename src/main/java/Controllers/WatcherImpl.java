@@ -66,8 +66,9 @@ public class WatcherImpl implements Watcher {
     }
 
     private void setSourceEvent(WatchEvent<?> event){
-        LogManager.getLogger(this.getClass().getName()).debug(key.watchable());
-        Path path = ((Path) key.watchable());
+        Path path = Paths.get(key.watchable() + FileSystems.getDefault().getSeparator() + event.context());
+        LogManager.getLogger(this.getClass().getName()).debug(path);
+        LogManager.getLogger(this.getClass().getName()).debug(path.getParent());
         String filename = event.context().toString();
         String extension = filename.substring(filename.lastIndexOf(".") + 1);
 
