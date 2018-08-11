@@ -1,12 +1,9 @@
 package DAO;
 
 
-import Controllers.MoveOperationCommand;
 import Models.RunnableEvent;
-import Models.Target;
+import Models.TargetEvent;
 
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +16,7 @@ public class CollectionDao implements TargetDao {
     }
 
     @Override
-    public Target getTarget(int id) {
+    public TargetEvent getTarget(int id) {
         return null;
     }
 

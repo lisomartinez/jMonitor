@@ -1,18 +1,15 @@
 package Controllers;
 
-import DAO.CollectionDao;
 import Models.RunnableEvent;
 import Models.SourceEvent;
-import Models.Target;
+import Models.SetteableEventQueue;
+import Models.TargetEvent;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class EventHandlerTest {
     private EventManager eventManager;
@@ -24,9 +21,10 @@ public class EventHandlerTest {
         eventManager = EventManager.getEventManager();
 
         Set<RunnableEvent> targets = new HashSet<>();
-        Target one = new Target(Paths.get(System.getProperty("user.home")), "txt", Arrays.asList(new MoveOperationCommand(), new MoveOperationCommand()));
-        Target three = new  Target(Paths.get(System.getProperty("user.home")), "doc", Arrays.asList(new MoveOperationCommand(), new MoveOperationCommand()));
-        Target four = new Target(Paths.get(System.getProperty("user.home")), "zip", Arrays.asList(new MoveOperationCommand(), new MoveOperationCommand()));
+        TargetEvent one = new TargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        TargetEvent two = new TargetEvent(Paths.get(System.getProperty("user.home")), "pdf", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        TargetEvent three = new TargetEvent(Paths.get(System.getProperty("user.home")), "doc", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        TargetEvent four = new TargetEvent(Paths.get(System.getProperty("user.home")), "zip", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
 
         targets.add(one);
         targets.add(three);
@@ -37,16 +35,22 @@ public class EventHandlerTest {
         eventManager.addTarget(four);
 
         sourceEvent = new SourceEvent();
-        sourceEvent.setSource(Paths.get(System.getProperty("user.home")));
+        sourceEvent.setDirectory(Paths.get(System.getProperty("user.home")));
         sourceEvent.setExtension("txt");
 
-        eventHandler = new EventHandler(eventManager.getTargets());
+        SetteableEventQueue queue = new SetteableEventQueue();
 
-
+        eventHandler = new EventHandler(queue, targets);
     }
 
     @Test
     public void handleEvent() {
-        eventHandler.handleEvent(sourceEvent);
+
+
+
+        eventHandler.handle();
     }
+
+
+
 }

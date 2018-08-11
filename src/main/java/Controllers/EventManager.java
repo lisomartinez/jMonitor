@@ -2,15 +2,12 @@ package Controllers;
 
 import DAO.TargetDao;
 import Models.RunnableEvent;
-import Models.SourceEvent;
-import Models.Target;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class EventManager {
     private static EventManager eventManager = new EventManager();
-    private static SourceEvent sourceEvent = new SourceEvent();
     private Set<RunnableEvent> targets = new HashSet<>();
     private TargetDao targetDao;
 
@@ -27,8 +24,8 @@ public class EventManager {
     }
 
     public void addTarget(RunnableEvent target) {
-        assert target != null : "Target can not be null";
-        targets.add(target);
+        assert target != null : "TargetEvent can not be null";
+            targets.add(target);
     }
 
     public void removeTarget(RunnableEvent target) {
@@ -38,13 +35,5 @@ public class EventManager {
     public  Set<RunnableEvent> getTargets() {
         return targets;
     }
-
-
-    public  SourceEvent getSourceEvent() {
-        return sourceEvent;
-    }
-
-
-
 
 }

@@ -2,19 +2,18 @@ package DAO;
 
 import Controllers.MoveOperationCommand;
 import Models.RunnableEvent;
-import Models.Target;
+import Models.TargetEvent;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class TargetDaoTest {
+public class TargetEventDaoTest {
     private TargetDao targetDao;
 
     @Before
@@ -27,10 +26,10 @@ public class TargetDaoTest {
 
         Set<RunnableEvent> targets = new HashSet<>();
 
-        Models.Target one = new Models.Target(Paths.get(System.getProperty("user.home")), "txt", Arrays.asList(new MoveOperationCommand(), new MoveOperationCommand()));
-        Models.Target two = new Models.Target(Paths.get(System.getProperty("user.home")), "pdf", Arrays.asList(new MoveOperationCommand(), new MoveOperationCommand()));
-        Models.Target three = new Models.Target(Paths.get(System.getProperty("user.home")), "doc", Arrays.asList(new MoveOperationCommand(), new MoveOperationCommand()));
-        Models.Target four = new Target(Paths.get(System.getProperty("user.home")), "zip", Arrays.asList(new MoveOperationCommand(), new MoveOperationCommand()));
+        TargetEvent one = new TargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        TargetEvent two = new TargetEvent(Paths.get(System.getProperty("user.home")), "pdf", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        TargetEvent three = new TargetEvent(Paths.get(System.getProperty("user.home")), "doc", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        TargetEvent four = new TargetEvent(Paths.get(System.getProperty("user.home")), "zip", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
 
 
         targets.add(one);

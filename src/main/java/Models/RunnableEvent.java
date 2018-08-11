@@ -1,11 +1,9 @@
 package Models;
 
-import Controllers.OperationCommand;
-
-import java.util.List;
+import java.nio.file.Path;
 
 public interface RunnableEvent{
-    void runCommands();
-    boolean match(SourceEvent event);
-    List<OperationCommand> getCommands();
+    void runCommand();
+    boolean match(SetteableEvent event);
+    Path getDirectory();
 }
