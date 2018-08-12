@@ -1,7 +1,7 @@
-package Controllers;
+package Monitor;
 
-import DAO.TargetDao;
-import Models.RunnableEvent;
+import Dao.TargetDao;
+import Monitor.RunnableEvent.RunnableEvent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,7 @@ public class EventManager {
     }
 
     public void addTarget(RunnableEvent target) {
-        assert target != null : "TargetEvent can not be null";
+        assert target != null : "DirectoryTargetEvent can not be null";
             targets.add(target);
     }
 

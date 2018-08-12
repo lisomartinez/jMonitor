@@ -1,17 +1,19 @@
-package Models;
+package Monitor;
+
+import Monitor.Event;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class SetteableEventQueue {
+public class EventQueue {
 
-    private BlockingQueue<SetteableEvent> queue;
+    private BlockingQueue<Event> queue;
 
-    public SetteableEventQueue() {
+    public EventQueue() {
         queue = new LinkedBlockingQueue<>(10);
     }
 
-    public void putEvent(SetteableEvent event) {
+    public void putEvent(Event event) {
         try {
             queue.put(event);
         } catch (InterruptedException e) {
@@ -19,9 +21,9 @@ public class SetteableEventQueue {
         }
     }
 
-    public SetteableEvent getEvent() {
+    public Event getEvent() {
 
-        SetteableEvent event = null;
+        Event event = null;
         try {
             event = queue.take();
         } catch (InterruptedException e) {

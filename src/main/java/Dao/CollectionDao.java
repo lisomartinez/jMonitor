@@ -1,8 +1,8 @@
-package DAO;
+package Dao;
 
 
-import Models.RunnableEvent;
-import Models.TargetEvent;
+import Monitor.RunnableEvent.DirectoryTargetEvent;
+import Monitor.RunnableEvent.RunnableEvent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ public class CollectionDao implements TargetDao {
     }
 
     @Override
-    public TargetEvent getTarget(int id) {
+    public DirectoryTargetEvent getTarget(int id) {
         return null;
     }
 

@@ -1,9 +1,10 @@
 package Controllers;
 
-import Models.RunnableEvent;
-import Models.SourceEvent;
-import Models.SetteableEventQueue;
-import Models.TargetEvent;
+import Monitor.RunnableEvent.RunnableEvent;
+import Monitor.EventQueue;
+import Monitor.RunnableEvent.DirectoryTargetEvent;
+import Monitor.DirectoryMonitor.DirectoryWatcher;
+import Monitor.FileOperationCommand.MoveOperationCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,15 +17,15 @@ import static org.junit.Assert.*;
 import static java.nio.file.StandardWatchEventKinds.*;
 
 public class WatcherImplTest {
-    private WatcherImpl watcher;
+    private DirectoryWatcher watcher;
     private Set<RunnableEvent> targets;
 
-    private SetteableEventQueue queue;
+    private EventQueue queue;
 
     @Before
     public void create() {
-        queue = new SetteableEventQueue();
-        watcher = new WatcherImpl(queue, FileSystems.getDefault());
+        queue = new EventQueue();
+        watcher = new DirectoryWatcher(queue, FileSystems.getDefault());
         targets = new HashSet<>();
 
 
@@ -41,7 +42,7 @@ public class WatcherImplTest {
 
         Path folderPath = Paths.get(folder.toString());
 
-        TargetEvent one = new TargetEvent(Paths.get(folder.toString()), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent one = new DirectoryTargetEvent(Paths.get(folder.toString()), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
         targets.add(one);
 
         Path path = Paths.get(System.getProperty("user.home"));

@@ -1,6 +1,8 @@
 package Models;
 
-import Controllers.MoveOperationCommand;
+import Monitor.FileOperationCommand.MoveOperationCommand;
+import Monitor.RunnableEvent.DirectoryTargetEvent;
+import Monitor.RunnableEvent.RunnableEvent;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +17,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 
-public class TargetEventTest {
+public class DirectoryTargetEventTest {
     private Set<RunnableEvent> targets;
 
     @Before
@@ -38,10 +40,10 @@ public class TargetEventTest {
         paths.add(pthree);
         paths.add(pfour);
 
-        TargetEvent one = new TargetEvent(pone, "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        TargetEvent two = new TargetEvent(ptwo, "pdf", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        TargetEvent three = new TargetEvent(pthree, "doc", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        TargetEvent four = new TargetEvent(pfour,"zip", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent one = new DirectoryTargetEvent(pone, "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent two = new DirectoryTargetEvent(ptwo, "pdf", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent three = new DirectoryTargetEvent(pthree, "doc", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent four = new DirectoryTargetEvent(pfour,"zip", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
 
 
         targets.add(one);

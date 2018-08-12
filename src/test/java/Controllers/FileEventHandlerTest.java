@@ -1,48 +1,27 @@
 package Controllers;
 
-import Monitor.RunnableEvent.DirectoryTargetEvent;
 import Monitor.RunnableEvent.RunnableEvent;
+import Monitor.EventQueue;
+import Monitor.RunnableEvent.DirectoryTargetEvent;
 import Monitor.EventManager;
+import Monitor.FileOperationCommand.FileEventHandler;
 import Monitor.FileOperationCommand.MoveOperationCommand;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.junit.Assert.*;
-
-public class EventManagerTest {
+public class FileEventHandlerTest {
     private EventManager eventManager;
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
+    private FileEventHandler fileEventHandler;
+    private SourceEvent sourceEvent;
 
     @Before
-    public void create() {
+    public void create(){
         eventManager = EventManager.getEventManager();
-    }
 
-    @Test
-    public void addTarget(){
-        DirectoryTargetEvent directoryTargetEvent = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        eventManager.addTarget(directoryTargetEvent);
-        assertThat(eventManager.getTargets(), hasItem(directoryTargetEvent));
-    }
-
-    @Test
-    public void addTargetNullThrowAssertionError() {
-        exception.expect(AssertionError.class);
-        eventManager.addTarget(null);
-    }
-
-    @Test
-    public void loadTargets() {
         Set<RunnableEvent> targets = new HashSet<>();
         DirectoryTargetEvent one = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
         DirectoryTargetEvent two = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "pdf", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
@@ -57,7 +36,23 @@ public class EventManagerTest {
         eventManager.addTarget(three);
         eventManager.addTarget(four);
 
-        targets = eventManager.getTargets();
-        assertThat(targets, equalTo(eventManager.getTargets()));
+        sourceEvent = new SourceEvent();
+        sourceEvent.setDirectory(Paths.get(System.getProperty("user.home")));
+        sourceEvent.setExtension("txt");
+
+        EventQueue queue = new EventQueue();
+
+        fileEventHandler = new FileEventHandler(queue, targets);
     }
+
+    @Test
+    public void handleEvent() {
+
+
+
+        fileEventHandler.handle();
+    }
+
+
+
 }

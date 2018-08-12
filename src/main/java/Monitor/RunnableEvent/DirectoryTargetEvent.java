@@ -1,43 +1,39 @@
-package Models;
+package Monitor.RunnableEvent;
 
-import Controllers.OperationCommand;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import Monitor.Event;
+import Monitor.FileOperationCommand.FileOperationCommand;
 
 import java.nio.file.Path;
 import java.util.Objects;
 
-public class TargetEvent extends Event implements RunnableEvent {
+public class DirectoryTargetEvent extends Event implements RunnableEvent {
+    private FileOperationCommand command;
 
-    private OperationCommand command;
-
-    public TargetEvent(Path source, String extension, OperationCommand command) {
+    public DirectoryTargetEvent(Path source, String extension, FileOperationCommand command) {
         super(source, extension);
         this.command = command;
+        command.setMonitoredDirectory(source);
     }
 
 
-    public TargetEvent() {
+    public DirectoryTargetEvent() {
     }
 
     @Override
-    public boolean match(SetteableEvent event) {
+    public boolean match(Event event) {
 
         return source.equals(event.getDirectory().getParent()) && extension.equals(event.getExtension());
 
     }
     @Override
     public void runCommand(Path fullSourcePath) {
+
         command.execute(fullSourcePath);
     }
 
     @Override
-    public Path getDirectory() {
-        return super.getDirectory();
-    }
-
-    @Override
     public String toString() {
-        return "TargetEvent{" +
+        return "DirectoryTargetEvent{" +
                 "source=" + source +
                 ", extension=" + extension +
                 ", command=" + command + '\'' +
@@ -49,7 +45,7 @@ public class TargetEvent extends Event implements RunnableEvent {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TargetEvent that = (TargetEvent) o;
+        DirectoryTargetEvent that = (DirectoryTargetEvent) o;
         return Objects.equals(command, that.command);
     }
 

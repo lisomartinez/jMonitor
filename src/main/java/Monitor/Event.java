@@ -1,8 +1,8 @@
-package Models;
+package Monitor;
 
 import java.nio.file.Path;
 
-public abstract class Event {
+public class Event {
     protected Path source;
     protected String extension;
 
@@ -19,8 +19,19 @@ public abstract class Event {
     public Path getDirectory() {
         return source;
     }
+
+    public Event setDirectory(Path source) {
+        this.source = source;
+        return this;
+    }
+
     public String getExtension() {
         return extension;
+    }
+
+    public Event setExtension(String extension) {
+        this.extension = extension;
+        return this;
     }
 
     @Override

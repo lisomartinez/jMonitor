@@ -1,6 +1,9 @@
-package Controllers;
+package Monitor.DirectoryMonitor;
 
-import Models.*;
+import Monitor.RunnableEvent.RunnableEvent;
+import Monitor.Event;
+import Monitor.EventQueue;
+import Monitor.Watcher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,15 +15,15 @@ import java.util.Set;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
-public class WatcherImpl implements Watcher {
+public class DirectoryWatcher implements Watcher {
     private WatchService watchService;
     private WatchKey key;
-    private SetteableEvent sourceEvent;
-    private SetteableEventQueue queue;
+    private Event sourceEvent;
+    private EventQueue queue;
 
 
-    public WatcherImpl(SetteableEventQueue queue, FileSystem fileSystem) {
-        this.sourceEvent = new SourceEvent();
+    public DirectoryWatcher(EventQueue queue, FileSystem fileSystem) {
+        this.sourceEvent = new Event();
         this.queue = queue;
         try {
             watchService = fileSystem.newWatchService();
@@ -67,17 +70,20 @@ public class WatcherImpl implements Watcher {
 
     private void setSourceEvent(WatchEvent<?> event){
         Path path = Paths.get(key.watchable() + FileSystems.getDefault().getSeparator() + event.context());
+
         LogManager.getLogger(this.getClass().getName()).debug(path);
         LogManager.getLogger(this.getClass().getName()).debug(path.getParent());
+
         String filename = event.context().toString();
         String extension = filename.substring(filename.lastIndexOf(".") + 1);
 
         sourceEvent.setDirectory(path).setExtension(extension);
     }
 
-    private void addQueue(SetteableEvent event) {
+    private void addQueue(Event event) {
         Logger logger = LogManager.getLogger(this.getClass().getName());
         logger.debug(event);
+
         queue.putEvent(event);
     }
 
