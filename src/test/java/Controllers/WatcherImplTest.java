@@ -1,10 +1,10 @@
 package Controllers;
 
+import Monitor.DirectoryMonitor.MoveCommand;
 import Monitor.RunnableEvent.RunnableEvent;
 import Monitor.EventQueue;
 import Monitor.RunnableEvent.DirectoryTargetEvent;
 import Monitor.DirectoryMonitor.DirectoryWatcher;
-import Monitor.FileOperationCommand.MoveOperationCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +42,7 @@ public class WatcherImplTest {
 
         Path folderPath = Paths.get(folder.toString());
 
-        DirectoryTargetEvent one = new DirectoryTargetEvent(Paths.get(folder.toString()), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent one = new DirectoryTargetEvent(Paths.get(folder.toString()), "txt", new MoveCommand(Paths.get(System.getProperty("user.home"))));
         targets.add(one);
 
         Path path = Paths.get(System.getProperty("user.home"));

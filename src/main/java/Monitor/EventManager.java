@@ -1,22 +1,23 @@
 package Monitor;
 
-import Dao.TargetDao;
 import Monitor.RunnableEvent.RunnableEvent;
 
+import java.nio.file.Path;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class EventManager {
     private static EventManager eventManager = new EventManager();
     private Set<RunnableEvent> targets = new HashSet<>();
-    private TargetDao targetDao;
+
 
     private EventManager() {
     }
 
-    public void loadTargets(TargetDao targetDao){
-        this.targetDao = targetDao;
-        targets = targetDao.loadTargets();
+    public void loadTargets(){
+
     }
 
     public static EventManager getEventManager() {
@@ -36,11 +37,8 @@ public class EventManager {
         return targets;
     }
 
-    @Override
-    public String toString() {
-        return "EventManager{" +
-                "targets=" + targets +
-                ", targetDao=" + targetDao +
-                '}';
+    public List<Path> getTargetsPaths() {
+        return targets.stream().map(RunnableEvent::getSource).collect(Collectors.toList());
     }
+
 }

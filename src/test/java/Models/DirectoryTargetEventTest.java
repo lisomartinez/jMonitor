@@ -1,6 +1,6 @@
 package Models;
 
-import Monitor.FileOperationCommand.MoveOperationCommand;
+import Monitor.DirectoryMonitor.MoveCommand;
 import Monitor.RunnableEvent.DirectoryTargetEvent;
 import Monitor.RunnableEvent.RunnableEvent;
 import org.junit.Before;
@@ -40,10 +40,10 @@ public class DirectoryTargetEventTest {
         paths.add(pthree);
         paths.add(pfour);
 
-        DirectoryTargetEvent one = new DirectoryTargetEvent(pone, "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent two = new DirectoryTargetEvent(ptwo, "pdf", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent three = new DirectoryTargetEvent(pthree, "doc", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent four = new DirectoryTargetEvent(pfour,"zip", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent one = new DirectoryTargetEvent(pone, "txt", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent two = new DirectoryTargetEvent(ptwo, "pdf", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent three = new DirectoryTargetEvent(pthree, "doc", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent four = new DirectoryTargetEvent(pfour,"zip", new MoveCommand(Paths.get(System.getProperty("user.home"))));
 
 
         targets.add(one);

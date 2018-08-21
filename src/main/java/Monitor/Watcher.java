@@ -1,10 +1,11 @@
 package Monitor;
 
-import Monitor.RunnableEvent.RunnableEvent;
 
-import java.util.Set;
+import java.nio.file.Path;
+import java.util.List;
+
 
 public interface Watcher extends Runnable {
     void process();
-    void registerTargets(Set<RunnableEvent> targets);
+    void registerTargets(List<Path> targetPaths);
 }

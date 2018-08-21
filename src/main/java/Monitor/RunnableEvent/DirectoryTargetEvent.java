@@ -1,20 +1,17 @@
 package Monitor.RunnableEvent;
 
+import Monitor.DirectoryMonitor.Command;
+
 import Monitor.Event;
-import Monitor.FileOperationCommand.FileOperationCommand;
 
 import java.nio.file.Path;
-import java.util.Objects;
 
-public class DirectoryTargetEvent extends Event implements RunnableEvent {
-    private FileOperationCommand command;
 
-    public DirectoryTargetEvent(Path source, String extension, FileOperationCommand command) {
-        super(source, extension);
-        this.command = command;
-        command.setMonitoredDirectory(source);
-    }
-
+public class DirectoryTargetEvent implements RunnableEvent {
+    private Path source;
+    private Path destination;
+    private String extension;
+    private Command command;
 
     public DirectoryTargetEvent() {
     }
@@ -25,32 +22,43 @@ public class DirectoryTargetEvent extends Event implements RunnableEvent {
         return source.equals(event.getDirectory().getParent()) && extension.equals(event.getExtension());
 
     }
-    @Override
-    public void runCommand(Path fullSourcePath) {
 
-        command.execute(fullSourcePath);
+    @Override
+    public Command getCommand() {
+        return command;
     }
 
     @Override
-    public String toString() {
-        return "DirectoryTargetEvent{" +
-                "source=" + source +
-                ", extension=" + extension +
-                ", command=" + command + '\'' +
-                '}';
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DirectoryTargetEvent that = (DirectoryTargetEvent) o;
-        return Objects.equals(command, that.command);
+    public RunnableEvent setSource(Path source) {
+        this.source = source;
+        return this;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(command);
+    public RunnableEvent setDestination(Path destination) {
+        this.destination = destination;
+        return this;
+    }
+
+    @Override
+    public RunnableEvent setExtension(String extension) {
+        this.extension = extension;
+        return this;
+    }
+
+    @Override
+    public RunnableEvent setCommand(Command command) {
+        this.command = command;
+        return this;
+    }
+
+    @Override
+    public Path getDestination() {
+        return destination;
+    }
+
+    @Override
+    public Path getSource() {
+        return source;
     }
 }

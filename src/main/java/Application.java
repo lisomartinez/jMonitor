@@ -1,10 +1,10 @@
-import Monitor.FileOperationCommand.CopyOperationCommand;
+import Monitor.DirectoryMonitor.CopyCommand;
 import Monitor.EventQueue;
 import Monitor.RunnableEvent.DirectoryTargetEvent;
 import Monitor.*;
 import Monitor.DirectoryMonitor.DirectoryMonitor;
 import Monitor.DirectoryMonitor.DirectoryWatcher;
-import Monitor.FileOperationCommand.FileEventHandler;
+import Monitor.DirectoryMonitor.FileEventHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -29,8 +29,8 @@ public class Application {
 
         Set<DirectoryTargetEvent> targets = new HashSet<>();
 
-        CopyOperationCommand cmd1 = new CopyOperationCommand(Paths.get("/Users/liso/Documents"));
-        CopyOperationCommand cmd2 = new CopyOperationCommand(Paths.get("/Users/liso/Downloads"));
+        CopyCommand cmd1 = new CopyCommand(Paths.get("/Users/liso/Documents"));
+        CopyCommand cmd2 = new CopyCommand(Paths.get("/Users/liso/Downloads"));
 
 
         DirectoryTargetEvent directoryTargetEvent1 = new DirectoryTargetEvent(path, "txt", cmd1);

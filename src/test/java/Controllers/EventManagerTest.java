@@ -3,7 +3,7 @@ package Controllers;
 import Monitor.RunnableEvent.DirectoryTargetEvent;
 import Monitor.RunnableEvent.RunnableEvent;
 import Monitor.EventManager;
-import Monitor.FileOperationCommand.MoveOperationCommand;
+import Monitor.DirectoryMonitor.MoveCommand;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class EventManagerTest {
 
     @Test
     public void addTarget(){
-        DirectoryTargetEvent directoryTargetEvent = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent directoryTargetEvent = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveCommand(Paths.get(System.getProperty("user.home"))));
         eventManager.addTarget(directoryTargetEvent);
         assertThat(eventManager.getTargets(), hasItem(directoryTargetEvent));
     }
@@ -44,10 +44,10 @@ public class EventManagerTest {
     @Test
     public void loadTargets() {
         Set<RunnableEvent> targets = new HashSet<>();
-        DirectoryTargetEvent one = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent two = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "pdf", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent three = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "doc", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent four = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "zip", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent one = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent two = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "pdf", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent three = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "doc", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent four = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "zip", new MoveCommand(Paths.get(System.getProperty("user.home"))));
 
         targets.add(one);
         targets.add(three);

@@ -1,11 +1,11 @@
 package Controllers;
 
+import Monitor.DirectoryMonitor.MoveCommand;
 import Monitor.RunnableEvent.RunnableEvent;
 import Monitor.EventQueue;
 import Monitor.RunnableEvent.DirectoryTargetEvent;
 import Monitor.EventManager;
-import Monitor.FileOperationCommand.FileEventHandler;
-import Monitor.FileOperationCommand.MoveOperationCommand;
+import Monitor.DirectoryMonitor.FileEventHandler;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,10 +23,10 @@ public class FileEventHandlerTest {
         eventManager = EventManager.getEventManager();
 
         Set<RunnableEvent> targets = new HashSet<>();
-        DirectoryTargetEvent one = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent two = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "pdf", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent three = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "doc", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
-        DirectoryTargetEvent four = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "zip", new MoveOperationCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent one = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "txt", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent two = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "pdf", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent three = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "doc", new MoveCommand(Paths.get(System.getProperty("user.home"))));
+        DirectoryTargetEvent four = new DirectoryTargetEvent(Paths.get(System.getProperty("user.home")), "zip", new MoveCommand(Paths.get(System.getProperty("user.home"))));
 
         targets.add(one);
         targets.add(three);

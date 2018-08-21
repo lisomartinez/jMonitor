@@ -1,6 +1,5 @@
 package Monitor.DirectoryMonitor;
 
-import Monitor.FileOperationCommand.FileEventHandler;
 import Monitor.Monitor;
 import Monitor.Watcher;
 

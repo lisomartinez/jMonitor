@@ -1,6 +1,5 @@
 package Monitor.DirectoryMonitor;
 
-import Monitor.RunnableEvent.RunnableEvent;
 import Monitor.Event;
 import Monitor.EventQueue;
 import Monitor.Watcher;
@@ -9,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.Set;
+import java.util.List;
 
 
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
@@ -41,8 +40,8 @@ public class DirectoryWatcher implements Watcher {
         }
     }
 
-    public void registerTargets(Set<RunnableEvent> targets) {
-        targets.stream().map(RunnableEvent::getDirectory).forEach(this::register);
+    public void registerTargets(List<Path> targetPaths) {
+        targetPaths.parallelStream().forEach(this::register);
     }
 
     public void process() {
@@ -65,7 +64,7 @@ public class DirectoryWatcher implements Watcher {
 
     void processEvent(WatchEvent<?> event) {
         setSourceEvent(event);
-        addQueue(sourceEvent);
+        enqueue(sourceEvent);
     }
 
     private void setSourceEvent(WatchEvent<?> event){
@@ -80,7 +79,7 @@ public class DirectoryWatcher implements Watcher {
         sourceEvent.setDirectory(path).setExtension(extension);
     }
 
-    private void addQueue(Event event) {
+    private void enqueue(Event event) {
         Logger logger = LogManager.getLogger(this.getClass().getName());
         logger.debug(event);
 
