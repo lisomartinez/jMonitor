@@ -11,8 +11,9 @@ public class CopyCommand extends FileCommand {
     }
 
     @Override
-    public void setCommandReceiver(CommandReceiver commandReceiver) {
+    public Command setCommandReceiver(CommandReceiver commandReceiver) {
         this.fileCommandReceiver = commandReceiver;
+        return this;
     }
 
 

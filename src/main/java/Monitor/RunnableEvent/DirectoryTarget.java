@@ -7,13 +7,13 @@ import Monitor.Event;
 import java.nio.file.Path;
 
 
-public class DirectoryTargetEvent implements RunnableEvent {
+public class DirectoryTarget implements Target {
     private Path source;
     private Path destination;
     private String extension;
     private Command command;
 
-    public DirectoryTargetEvent() {
+    public DirectoryTarget() {
     }
 
     @Override
@@ -29,25 +29,25 @@ public class DirectoryTargetEvent implements RunnableEvent {
     }
 
     @Override
-    public RunnableEvent setSource(Path source) {
+    public Target source(Path source) {
         this.source = source;
         return this;
     }
 
     @Override
-    public RunnableEvent setDestination(Path destination) {
+    public Target destination(Path destination) {
         this.destination = destination;
         return this;
     }
 
     @Override
-    public RunnableEvent setExtension(String extension) {
+    public Target extension(String extension) {
         this.extension = extension;
         return this;
     }
 
     @Override
-    public RunnableEvent setCommand(Command command) {
+    public Target command(Command command) {
         this.command = command;
         return this;
     }
@@ -60,5 +60,10 @@ public class DirectoryTargetEvent implements RunnableEvent {
     @Override
     public Path getSource() {
         return source;
+    }
+
+    @Override
+    public String getExtension() {
+        return extension;
     }
 }

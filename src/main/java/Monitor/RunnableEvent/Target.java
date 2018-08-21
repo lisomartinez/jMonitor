@@ -5,13 +5,14 @@ import Monitor.Event;
 
 import java.nio.file.Path;
 
-public interface RunnableEvent{
+public interface Target {
     Command getCommand();
     boolean match(Event event);
-    RunnableEvent setSource(Path source);
-    RunnableEvent setDestination(Path destination);
-    RunnableEvent setExtension(String extension);
-    RunnableEvent setCommand(Command command);
+    Target source(Path source);
+    Target destination(Path destination);
+    Target extension(String extension);
+    Target command(Command command);
     Path getDestination();
     Path getSource();
+    String getExtension();
 }

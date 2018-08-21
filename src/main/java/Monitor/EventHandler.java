@@ -1,6 +1,6 @@
 package Monitor;
 
-import Monitor.RunnableEvent.RunnableEvent;
+import Monitor.RunnableEvent.Target;
 
 import java.util.Set;
 
@@ -10,5 +10,5 @@ public interface EventHandler extends Runnable {
     @Override
     void run();
 
-    Set<RunnableEvent> getTargets();
+    Set<Target> getTargets();
 }

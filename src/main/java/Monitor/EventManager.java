@@ -1,6 +1,6 @@
 package Monitor;
 
-import Monitor.RunnableEvent.RunnableEvent;
+import Monitor.RunnableEvent.Target;
 
 import java.nio.file.Path;
 import java.util.HashSet;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class EventManager {
     private static EventManager eventManager = new EventManager();
-    private Set<RunnableEvent> targets = new HashSet<>();
+    private Set<Target> targets = new HashSet<>();
 
 
     private EventManager() {
@@ -24,21 +24,17 @@ public class EventManager {
         return eventManager;
     }
 
-    public void addTarget(RunnableEvent target) {
-        assert target != null : "DirectoryTargetEvent can not be null";
+    public void addTarget(Target target) {
+        assert target != null : "DirectoryTarget can not be null";
             targets.add(target);
     }
 
-    public void removeTarget(RunnableEvent target) {
+    public void removeTarget(Target target) {
         targets.remove(target);
     }
 
-    public  Set<RunnableEvent> getTargets() {
-        return targets;
-    }
-
     public List<Path> getTargetsPaths() {
-        return targets.stream().map(RunnableEvent::getSource).collect(Collectors.toList());
+        return targets.stream().map(Target::getSource).collect(Collectors.toList());
     }
 
 }

@@ -2,7 +2,10 @@ package Monitor.DirectoryMonitor;
 
 import org.apache.logging.log4j.LogManager;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 public class FileCommandReceiver implements CommandReceiver {
@@ -12,21 +15,24 @@ public class FileCommandReceiver implements CommandReceiver {
 
     @Override
     public void copy() {
-        LogManager.getLogger(this.getClass().getName()).debug("Copy from...");
-//        Path pathToFile = destination.resolve(source.getFileName());
-//
-//
-//        try {
-//            Files.copy(source, pathToFile, REPLACE_EXISTING);
-//            LogManager.getLogger(this.getClass().getName()).debug(new StringBuilder().append("COPY: ").append(source).append(" TO ").append(pathToFile).toString());
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+        Path pathToFile = destination.resolve(source.getFileName());
+        try {
+            Files.copy(source, pathToFile, REPLACE_EXISTING);
+            LogManager.getLogger(this.getClass().getName()).debug(new StringBuilder().append("COPY: ").append(source).append(" TO ").append(pathToFile).toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public void move(Command command) {
-        LogManager.getLogger(this.getClass().getName()).debug("Move from...");
+    public void move() {
+        Path pathToFile = destination.resolve(source.getFileName());
+        try {
+            Files.move(source, pathToFile, REPLACE_EXISTING);
+            LogManager.getLogger(this.getClass().getName()).debug(new StringBuilder().append("MOVE: ").append(source).append(" TO ").append(pathToFile).toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public Path getSource() {
